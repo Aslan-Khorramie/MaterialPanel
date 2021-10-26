@@ -1,0 +1,42 @@
+.page-main-header {
+  text-align: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 320px) {
+  .page-main-header {
+    font-size: 2rem !important;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .page-main-header {
+    font-size: 2.5rem !important;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px) {
+  .page-main-header {
+    font-size: 2.7rem !important;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .page-main-header {
+    font-size: 2.9rem !important;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .page-main-header {
+    font-size: 3.1rem !important;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .page-main-header {
+    font-size: 3.5rem !important;
+  }
+}

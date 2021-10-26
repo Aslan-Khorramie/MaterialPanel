@@ -1,0 +1,43 @@
+@media screen and (max-width: 800px) {
+  .outlined-search-field {
+    width: 100%;
+    padding: 16px;
+    .MuiOutlinedInput-root {
+      width: 100%;
+      margin: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .outlined-search-field {
+    width: 100%;
+    padding: 16px;
+    .MuiOutlinedInput-root {
+      width: 90%;
+      margin: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .outlined-search-field {
+    width: 100%;
+    padding: 16px;
+    .MuiOutlinedInput-root {
+      width: 80%;
+      margin: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .outlined-search-field {
+    width: 100%;
+    padding: 16px;
+    .MuiOutlinedInput-root {
+      width: 75%;
+      margin: auto;
+    }
+  }
+}

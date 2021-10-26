@@ -1,0 +1,42 @@
+.partial-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Vazir-Medium-FD";
+}
+
+@media screen and (max-width: 320px) {
+  .partial-loading {
+    height: 140px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .partial-loading {
+    height: 180px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 800px) {
+  .partial-loading {
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .partial-loading {
+    height: 250px;
+  }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .partial-loading {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 1281px) {
+  .partial-loading {
+    height: 300px;
+  }
+}

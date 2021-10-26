@@ -1,0 +1,14 @@
+export const NAME_FA = "نام";
+export const NAME_EN = "First Name";
+export const LAST_NAME_FA = "نام خانوادگی";
+export const LAST_NAME_EN = "Last Name";
+export const MOBILE_FA = "شماره موبایل";
+export const MOBILE_EN = "Mobile No.";
+export const EMAIL_FA = "ایمیل";
+export const EMAIL_EN = "Email";
+export const NATIONAL_CODE_FA = "کد ملی";
+export const NATIONAL_CODE_EN = "National Code";
+export const BIRTHDAY_FA = "تاریخ تولد";
+export const BIRTHDAY_EN = "Birth Date";
+export const EXPIRE_DATE_FA = "روز تا انقضاء عضویت";
+export const EXPIRE_DATE_EN = "Expire Date";

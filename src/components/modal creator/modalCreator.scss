@@ -1,0 +1,39 @@
+.modal {
+  .MuiDialog-container {
+    .MuiPaper-root {
+      overflow: hidden;
+      .MuiDialogTitle-root {
+        h6 {
+          padding: 4px 16px;
+        }
+      }
+      .MuiDialogContent-root {
+        min-width: 40vw;
+        min-height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .modal {
+    .MuiDialog-container {
+      .MuiPaper-root {
+        overflow: hidden;
+        .MuiDialogTitle-root {
+          h6 {
+            padding: 4px 16px;
+          }
+        }
+        .MuiDialogContent-root {
+          min-width: 60vw;
+          min-height: 30vh;
+        }
+      }
+    }
+  }
+}

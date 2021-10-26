@@ -1,0 +1,15 @@
+.login-alert {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.flags-box {
+  display: flex;
+  justify-content: center;
+  span {
+    font-size: 2rem;
+    img {
+      border-radius: 8px;
+    }
+  }
+}

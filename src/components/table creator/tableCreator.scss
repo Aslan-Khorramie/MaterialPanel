@@ -1,0 +1,23 @@
+.table {
+  margin: 32px auto;
+  .MuiTableHead-root {
+    .MuiTableRow-head {
+      background-color: rgba(0, 0, 0, 0.3);
+      .MuiTableCell-head {
+        font-size: 14px;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+    }
+  }
+  .MuiTableBody-root {
+    .MuiTableRow-root {
+      .MuiTableCell-body {
+        white-space: nowrap;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
