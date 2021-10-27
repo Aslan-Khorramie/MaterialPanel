@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 
 // Import Components
-import { directionReducer } from "./directionReducer";
+import directionSlice from "./directionReducer";
 import { authReducer } from "./authReducer";
 import { sideMenuReducer } from "./sideMenuReducer";
-import { LangReducer } from "./langReducer";
+import langSlice from "./langReducer";
 
 export const rootReducer = combineReducers({
-  dir: directionReducer,
+  dir: directionSlice,
   auth: authReducer,
   sideMenu: sideMenuReducer,
-  lang: LangReducer,
+  lang: langSlice,
 });

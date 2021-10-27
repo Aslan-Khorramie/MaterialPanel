@@ -40,7 +40,10 @@ import { useTranslation } from "react-i18next";
 // Import Style
 import "./Login.scss";
 
+// import components
 import { DEV_API } from "../../constants/api/index";
+import { toggle_lang } from "../../redux/reducers/langReducer";
+import { toggle_dir } from "../../redux/reducers/directionReducer";
 
 function Login(props) {
   //we should declare every component language to take advantage of i18n
@@ -291,14 +294,8 @@ function Login(props) {
             <span
               onClick={() => {
                 handleLanguage("en");
-                dispatch({
-                  type: "CHANGE_DIR",
-                  payload: "ltr",
-                });
-                dispatch({
-                  type: "CHANGE_LANG",
-                  payload: "en",
-                });
+                dispatch(toggle_dir("ltr"));
+                dispatch(toggle_lang("en"));
               }}
             >
               <IconButton>
@@ -308,14 +305,8 @@ function Login(props) {
             <span
               onClick={() => {
                 handleLanguage("fa");
-                dispatch({
-                  type: "CHANGE_DIR",
-                  payload: "rtl",
-                });
-                dispatch({
-                  type: "CHANGE_LANG",
-                  payload: "fa",
-                });
+                dispatch(toggle_dir("rtl"));
+                dispatch(toggle_lang("fa"));
               }}
             >
               <IconButton>
