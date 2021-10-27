@@ -1,7 +1,20 @@
 {
   "translations": {
-    "buttons": {
-      "login": "login"
+    "login_page": {
+      "page_title": "Hoo Club | Login",
+      "title": "Log In",
+      "login_btn": "login",
+      "username": "Email/Username",
+      "password": "Password",
+      "remember": "Remember Me",
+      "forget_password": "Forgot Your Password?",
+      "invalid_data": "Provided Username/Email or Password Is Incorrect",
+      "short_username": "Username Should Be Atleast 5 Characters!",
+      "long_username": "Username Should Be Atmost 50 Characters!",
+      "required": "This Field Is Required!",
+      "short_password": "Password Should Be Atleast 3 Characters!",
+      "long_password": "Password Should Be Atmost 50 Characters!",
+      "copy_right": "Copyright © Hoo Club "
     },
     "Advantages": "Advantages"
   }

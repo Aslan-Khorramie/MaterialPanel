@@ -6,6 +6,9 @@ import XHR from "i18next-xhr-backend";
 import EnLanguage from "./locale/en/translate.json";
 import FaLanguage from "./locale/fa/translate.json";
 
+let langObject = JSON.parse(
+  JSON.parse(localStorage.getItem("persist:root")).lang
+);
 i18n
   .use(XHR)
   .use(LanguageDetector)
@@ -16,7 +19,7 @@ i18n
       en: EnLanguage,
       fa: FaLanguage,
     },
-    lng: "fa",
+    lng: langObject.lang || "fa",
     fallbackLng: "fa",
     debug: false,
 

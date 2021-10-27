@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Avatar,
   Button,
@@ -40,47 +40,7 @@ import { useTranslation } from "react-i18next";
 // Import Style
 import "./Login.scss";
 
-// Import Constants
-import {
-  USERNAME_LABEL_EN,
-  PASSWORD_LABEL_EN,
-  LOGIN_BTN_LABEL_EN,
-  REMEMBER_ME_LABEL_EN,
-  FORGOT_PASSWORD_EN,
-  COPY_RIGHT_EN,
-  REQUIRED_ERROR_EN,
-  SHORT_USERNAME_EN,
-  LONG_USERNAME_EN,
-  SHORT_PASSWORD_EN,
-  LONG_PASSWORD_EN,
-  INVALID_USERNAME_OR_PASSWORD_EN,
-} from "../../constants/english/index";
-import {
-  USERNAME_LABEL_FA,
-  PASSWORD_LABEL_FA,
-  LOGIN_BTN_LABEL_FA,
-  REMEMBER_ME_LABEL_FA,
-  FORGOT_PASSWORD_FA,
-  COPY_RIGHT_FA,
-  REQUIRED_ERROR_FA,
-  SHORT_USERNAME_FA,
-  LONG_USERNAME_FA,
-  SHORT_PASSWORD_FA,
-  LONG_PASSWORD_FA,
-  INVALID_USERNAME_OR_PASSWORD_FA,
-} from "../../constants/persian/index";
 import { DEV_API } from "../../constants/api/index";
-
-function Copyright(props) {
-  const { DIR = {} } = props;
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {DIR.direction === "rtl" ? COPY_RIGHT_FA : COPY_RIGHT_EN}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 function Login(props) {
   //we should declare every component language to take advantage of i18n
@@ -186,6 +146,108 @@ function Login(props) {
       });
   };
 
+  const LoginForm = useCallback(() => {
+    return (
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={Yup.object().shape({
+          email: Yup.string()
+            .min(5, t("login_page.short_username"))
+            .max(50, t("login_page.long_username"))
+            .required(t("login_page.required")),
+          password: Yup.string()
+            .min(3, t("login_page.short_password"))
+            .max(50, t("login_page.long_password"))
+            .required(t("login_page.required")),
+        })}
+        onSubmit={(values) => {
+          login(values);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          /* and other goodies */
+        }) => (
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label={t("login_page.username")}
+              name="email"
+              autoComplete="email"
+              onChange={handleChange}
+              value={values.email}
+              onBlur={handleBlur}
+              error={errors.email && touched.email ? true : false}
+              helperText={errors.email && touched.email && errors.email}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label={t("login_page.password")}
+              type={showPassword ? "text" : "password"}
+              id="password"
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              onChange={handleChange}
+              value={values.password}
+              onBlur={handleBlur}
+              error={errors.password && touched.password ? true : false}
+              helperText={
+                errors.password && touched.password && errors.password
+              }
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label={t("login_page.remember")}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              {t("login_page.login_btn")}
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  {t("login_page.forget_password")}
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+    );
+    // eslint-disable-next-line
+  }, [t]);
+
   return (
     <ThemeProvider theme={DIR.direction === "rtl" ? RTLTheme : LTRTheme}>
       <CssBaseline />
@@ -208,9 +270,7 @@ function Login(props) {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              {DIR.direction === "rtl"
-                ? LOGIN_BTN_LABEL_FA
-                : LOGIN_BTN_LABEL_EN}
+              {t("login_page.title")}
             </Typography>
             {showAlert ? (
               <Alert
@@ -220,156 +280,12 @@ function Login(props) {
                 className="login-alert"
                 severity="error"
               >
-                {DIR.direction === "rtl"
-                  ? INVALID_USERNAME_OR_PASSWORD_FA
-                  : INVALID_USERNAME_OR_PASSWORD_EN}
+                {t("login_page.invalid_data")}
               </Alert>
             ) : (
               ""
             )}
-            <Formik
-              initialValues={{ email: "", password: "" }}
-              validationSchema={Yup.object().shape({
-                email: Yup.string()
-                  .min(
-                    5,
-                    DIR.direction === "rtl"
-                      ? SHORT_USERNAME_FA
-                      : SHORT_USERNAME_EN
-                  )
-                  .max(
-                    50,
-                    DIR.direction === "rtl"
-                      ? LONG_USERNAME_FA
-                      : LONG_USERNAME_EN
-                  )
-                  .required(
-                    DIR.direction === "rtl"
-                      ? REQUIRED_ERROR_FA
-                      : REQUIRED_ERROR_EN
-                  ),
-                password: Yup.string()
-                  .min(
-                    3,
-                    DIR.direction === "rtl"
-                      ? SHORT_PASSWORD_FA
-                      : SHORT_PASSWORD_EN
-                  )
-                  .max(
-                    50,
-                    DIR.direction === "rtl"
-                      ? LONG_PASSWORD_FA
-                      : LONG_PASSWORD_EN
-                  )
-                  .required(
-                    DIR.direction === "rtl"
-                      ? REQUIRED_ERROR_FA
-                      : REQUIRED_ERROR_EN
-                  ),
-              })}
-              onSubmit={(values) => {
-                login(values);
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting,
-                /* and other goodies */
-              }) => (
-                <form
-                  className={classes.form}
-                  noValidate
-                  onSubmit={handleSubmit}
-                >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label={
-                      DIR.direction === "rtl"
-                        ? USERNAME_LABEL_FA
-                        : USERNAME_LABEL_EN
-                    }
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={handleChange}
-                    value={values.email}
-                    onBlur={handleBlur}
-                    error={errors.email && touched.email ? true : false}
-                    helperText={errors.email && touched.email && errors.email}
-                  />
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label={
-                      DIR.direction === "rtl"
-                        ? PASSWORD_LABEL_FA
-                        : PASSWORD_LABEL_EN
-                    }
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    autoComplete="current-password"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            edge="end"
-                          >
-                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                    onChange={handleChange}
-                    value={values.password}
-                    onBlur={handleBlur}
-                    error={errors.password && touched.password ? true : false}
-                    helperText={
-                      errors.password && touched.password && errors.password
-                    }
-                  />
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label={
-                      DIR.direction === "rtl"
-                        ? REMEMBER_ME_LABEL_FA
-                        : REMEMBER_ME_LABEL_EN
-                    }
-                  />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
-                    {t("buttons.login")}
-                  </Button>
-                  <Grid container>
-                    <Grid item xs>
-                      <Link href="#" variant="body2">
-                        {DIR.direction === "rtl"
-                          ? FORGOT_PASSWORD_FA
-                          : FORGOT_PASSWORD_EN}
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </form>
-              )}
-            </Formik>
+            <LoginForm />
           </div>
           <Box mt={8} className="flags-box">
             <span
@@ -378,6 +294,10 @@ function Login(props) {
                 dispatch({
                   type: "CHANGE_DIR",
                   payload: "ltr",
+                });
+                dispatch({
+                  type: "CHANGE_LANG",
+                  payload: "en",
                 });
               }}
             >
@@ -392,6 +312,10 @@ function Login(props) {
                   type: "CHANGE_DIR",
                   payload: "rtl",
                 });
+                dispatch({
+                  type: "CHANGE_LANG",
+                  payload: "fa",
+                });
               }}
             >
               <IconButton>
@@ -400,7 +324,11 @@ function Login(props) {
             </span>
           </Box>
           <Box mt={8}>
-            <Copyright DIR={DIR} />
+            <Typography variant="body2" color="textSecondary" align="center">
+              {t("login_page.copy_right")}
+              {new Date().getFullYear()}
+              {"."}
+            </Typography>
           </Box>
         </Container>
       </StylesProvider>
